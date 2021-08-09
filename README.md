@@ -4,8 +4,9 @@
 (2) ng build //To build the application
 (3) ng serve //To run the application
 (4) click http://localhost:4200 to access the application.
-(5) Populate all fields and save record. Verify patient by checking the list.
-(6) Have fun.
+(5) run the backend application named medical-record
+(6) Populate all fields and save record. Verify patient by checking the list.
+(7) Have fun.
 
 #TODO
 (1) use countries and cities from the backend
