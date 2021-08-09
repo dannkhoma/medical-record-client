@@ -1,0 +1,117 @@
+<div xmlns="http://www.w3.org/1999/html">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="group-gap">
+
+      <div class="form-group">
+
+        <input
+          placeholder="First Name"
+          formControlName="firstName"
+          type="text"
+          class="form-control"
+          id="firstName"
+          required
+          [(ngModel)]="patientRequest.firstName"
+          name="firstName"
+          [ngClass]="{ 'is-invalid': submitted && formControls.firstName.errors }"
+        />
+        <div *ngIf="submitted && formControls.firstName.errors" class="invalid-feedback">
+          <div *ngIf="formControls.firstName.errors.required">First Name is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input
+          placeholder="Last Name"
+          formControlName="lastName"
+          class="form-control"
+          id="lastName"
+          required
+          [(ngModel)]="patientRequest.lastName"
+          name="lastName"
+          [ngClass]="{ 'is-invalid': submitted && formControls.lastName.errors }"
+        />
+        <div *ngIf="submitted && formControls.lastName.errors" class="invalid-feedback">
+          <div *ngIf="formControls.lastName.errors.required">Last Name is required</div>
+        </div>
+      </div>
+
+      <div class="form-group form-check form-check-inline" *ngFor="let gender of genders">
+        <label>
+          <input formControlName="gender" type="radio" name="gender" [value]="gender"
+                 [(ngModel)]="patientRequest.gender">
+          {{gender}}
+        </label>
+      </div>
+
+
+      <div class="form-group">
+        <input
+          placeholder="Age"
+          formControlName="age"
+          class="form-control"
+          id="age"
+          required
+          [(ngModel)]="patientRequest.age"
+          name="age"
+          [ngClass]="{ 'is-invalid': submitted && formControls.age.errors }"
+        />
+
+      </div>
+
+      <div class="form-group">
+        <select class="custom-select" formControlName="city" [(ngModel)]="patientRequest.city">
+          <option disabled>City</option>
+          <option>Choose city</option>
+          <option *ngFor="let city of cities">{{city}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <select class="custom-select" formControlName="country" [(ngModel)]="patientRequest.country">
+          <option disabled>Country</option>
+          <option>Choose country</option>
+          <option *ngFor="let country of countries">{{country}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Living with Diabetes?</label>
+      <div *ngFor="let diabeticState of diabetesStates">
+
+        <input formControlName="diabetesState" type="radio" name="diabetesState" [value]="diabeticState"
+               [(ngModel)]="patientRequest.diabetesState">
+        {{diabeticState}}
+
+      </div>
+
+      <div class="d-flex  flex-row-reverse">
+        <button type="submit" class="btn btn-success ">Submit</button>
+      </div>
+
+    </div>
+
+  </form>
+
+  <hr>
+
+  <div>
+    <h5>List of Medical Records</h5>
+    <span>
+    <input type="checkbox" (change)="onCheckboxChange($event)"/>
+    Only minors</span>
+  </div>
+
+  <table class="table table-striped">
+
+    <tbody>
+    <tr *ngFor="let patient of patients">
+      <th scope="row">{{ patient.firstName }} {{patient.lastName}} ({{patient.gender}}) {{patient.age}} - {{patient.city?.name}} ({{patient.country?.name}}) </th>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>
